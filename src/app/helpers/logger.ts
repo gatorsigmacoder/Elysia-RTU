@@ -17,7 +17,9 @@ export class Logger {
               winston.format.simple()
             ),
           }),
-          new winston.transports.File({ filename: "combined.log" }),
+          new winston.transports.File({
+            filename: "src/storage/logs/combined.log",
+          }),
         ],
       });
     }
