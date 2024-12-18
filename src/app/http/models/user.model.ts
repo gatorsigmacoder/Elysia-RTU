@@ -28,4 +28,28 @@ export class UserModel {
       await this.dbConfig.close(); // Ensure the connection is closed
     }
   }
+
+  /**
+   * Inserts a new user into the database.
+   * @param {any} userData The data of the user to insert.
+   * @returns {Promise<any>} The result of the insert operation.
+   */
+  async createData(userData: any): Promise<any> {
+    try {
+      const db = await this.dbConfig.connect(); // Connect to the database
+      const collection = db.collection("users"); // Use the 'users' collection
+      const result = await collection.insertOne(userData); // Insert the document
+      console.info("Data successfully inserted:", result.insertedId);
+      return result; // Return the result of the insert operation
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error inserting data:", error.message);
+      } else {
+        console.error("An unknown error occurred:", error);
+      }
+      throw error; // Rethrow the error for handling by the caller
+    } finally {
+      await this.dbConfig.close(); // Ensure the connection is closed
+    }
+  }
 }
