@@ -1,15 +1,37 @@
 # Elysia-RTU
 
-Elysia-RTU (Ready To Use). Elysia framework with structured schema and some helper
+Elysia-RTU (Ready To Use). Elysia framework with structured schema and some helper. If you are too lazy to initiate Elysia project, then this is what you looking for 🤩. For now, Elysia-RTU has some feature including database seeder, logger (with winston), API response handler and little config for database. Unfortunately for this version only provided for mongodb, we will add more feature further.
 
-# Elysia with Bun runtime
+# Commands
 
-## Getting Started
+## Database Seeder
 
-To get started with this template, simply paste this command into your terminal:
+To seed database, simply just run this command :
 
 ```bash
-bun create elysia ./elysia-example
+bun migrate --seed
+```
+
+```bash
+bun migrate --populate
+```
+
+```bash
+bun migrate --pop
+```
+
+To clear database, simply just run this command :
+
+```bash
+bun migrate --clear
+```
+
+```bash
+bun migrate --cl
+```
+
+```bash
+bun migrate --thanos-snap
 ```
 
 ## Development
