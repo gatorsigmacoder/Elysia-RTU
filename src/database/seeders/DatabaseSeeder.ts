@@ -12,29 +12,46 @@ class DatabaseSeeder extends Seeder {
 
   public async run(): Promise<void> {
     this.preCommand();
+    const users = this.generateRandomUsers(100);
     try {
-      const user1 = await this.user.createData({
-        name: "yanto",
-        email: "yanto@mail.com",
-      });
-      const user2 = await this.user.createData({
-        name: "suparman",
-        email: "parman@mail.com",
-      });
-      const user3 = await this.user.createData({
-        name: "matthews",
-        email: "mat@mail.com",
-      });
-      const user4 = await this.user.createData({
-        name: "andrew",
-        email: "andrew@mail.com",
-      });
+      for (const user of users) {
+        await this.user.createData(user);
+      }
       Logger.info("Migration successful");
       this.logExecutionTime();
     } catch (error: unknown) {
       Logger.error(`Migration failed: ${error}`);
       process.exit(1);
     }
+  }
+
+  // Method to generate random users
+  private generateRandomUsers(
+    count: number
+  ): { name: string; email: string }[] {
+    const users: { name: string; email: string }[] = [];
+    const names = [
+      "Yanto",
+      "Suparman",
+      "Matthews",
+      "Andrew",
+      "John",
+      "Jane",
+      "Alice",
+      "Bob",
+      "Charlie",
+      "Dave",
+    ];
+
+    for (let i = 0; i < count; i++) {
+      const randomName = names[Math.floor(Math.random() * names.length)];
+      const randomEmail = `${randomName.toLowerCase()}${Math.floor(
+        Math.random() * 10000
+      )}@mail.com`;
+      users.push({ name: randomName, email: randomEmail });
+    }
+
+    return users;
   }
 }
 

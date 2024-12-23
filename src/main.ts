@@ -1,10 +1,10 @@
 import { Elysia } from "elysia";
 import { Routes } from "./app/http/routes/routes";
-import { configService } from "./config/app-config";
+import { appConfig } from "./config/app-config";
 
 const app = new Elysia();
 
-const port = configService.get("app").port;
+const port = appConfig.get("app").port;
 
 Routes(app);
 
